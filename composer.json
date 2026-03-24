@@ -1,0 +1,42 @@
+{
+    "name": "a-pb/horizon-ui",
+    "description": "Enhanced UI for Laravel Horizon - adds job name search/filter to Pending, Completed, and Failed tabs.",
+    "keywords": ["laravel", "horizon", "ui", "search", "filter", "jobs", "queue", "dashboard"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "a-pb",
+            "email": "olowadrian@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/a-pb/horizon-ui",
+    "support": {
+        "issues": "https://github.com/a-pb/horizon-ui/issues",
+        "source": "https://github.com/a-pb/horizon-ui"
+    },
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^11.0|^12.0",
+        "laravel/horizon": "^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "APB\\HorizonUI\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        },
+        "laravel": {
+            "providers": [
+                "APB\\HorizonUI\\HorizonUIServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
