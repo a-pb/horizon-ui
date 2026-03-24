@@ -16,7 +16,13 @@ class HorizonUIServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerMiddleware();
-        $this->overrideRoutes();
+
+        // Defer route registration until after ALL service providers have
+        // booted, ensuring our named routes overwrite Horizon's originals
+        // (Laravel uses last-registered-wins for named routes).
+        $this->app->booted(function () {
+            $this->overrideRoutes();
+        });
     }
 
     /**
@@ -35,9 +41,9 @@ class HorizonUIServiceProvider extends ServiceProvider
     /**
      * Register our enhanced controller routes, overriding Horizon's originals.
      *
-     * Laravel uses last-registered-wins for named routes, so we register
-     * our routes AFTER Horizon's boot — which is guaranteed because
-     * Laravel auto-discovers this provider after laravel/horizon.
+     * Laravel uses last-registered-wins for named routes. This method is
+     * called from the app->booted() callback to guarantee execution AFTER
+     * all service providers (including Horizon) have finished booting.
      */
     protected function overrideRoutes(): void
     {
